@@ -1,0 +1,16 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+alembic = "==1.2.0"
+psycopg2 = "==2.8.3"
+
+[packages]
+quart = "==0.10.0"
+uvloop = "==0.13.0"
+asyncpg = "==0.18.3"
+
+[requires]
+python_version = "3.7"

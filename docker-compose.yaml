@@ -1,0 +1,13 @@
+version: '3'
+services:
+  api:
+    build: .
+    image: quart-todo-api
+    container_name: quart-todo-api
+    volumes:
+      - ./src:/usr/app/code/src
+    env_file: 
+      - .env
+    ports:
+    - "5000:5000"
+    command: hypercorn src.server:app --bind '0.0.0.0:5000' --worker-class uvloop --reload

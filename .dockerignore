@@ -1,0 +1,8 @@
+.env
+.vscode
+docker-compose.yaml
+Dockerfile
+Pipfile
+*.lock
+.gitignore
+.dockerignore
