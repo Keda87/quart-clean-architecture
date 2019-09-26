@@ -6,6 +6,7 @@ services:
     container_name: quart-todo-api
     volumes:
       - ./src:/usr/app/code/src
+      - ./alembic:/usr/app/code/alembic
     env_file: 
       - .env
     ports:

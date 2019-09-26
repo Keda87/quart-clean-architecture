@@ -22,11 +22,15 @@ async def create_todo():
     return {'data': {'name': name, 'user': user}}, 201
 
 
-@todo_bp.route('/todos/<int:id>')
-async def update_todo():
-    return 'todo created'
-
-
-@todo_bp.route('/todos/<int:id>/archive')
-async def archive_todo():
-    return 'todo archived'
+@todo_bp.route('/todos', methods=['GET'])
+async def list_todo():
+    headers = request.headers.to_dict()
+    token = headers.get('Authorization')
+    try:
+        user = jwt.decode(token, SECRET, 'HS256')
+    except Exception:
+        return {'error': 'Authorization is required'}, 401
+    
+    data = await todo_service.get_all_todo(user)
+    data = list(data)
+    return {'data': [dict(i) for i in data]}

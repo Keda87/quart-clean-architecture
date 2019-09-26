@@ -22,7 +22,8 @@ def upgrade():
         TABLE_NAME,
         sa.Column('id', sa.BigInteger, primary_key=True),
         sa.Column('name', sa.String(225), nullable=False),
-        sa.Column('user_id', sa.BigInteger, sa.ForeignKey('users.id'), nullable=False)
+        sa.Column('user_id', sa.BigInteger, sa.ForeignKey('users.id'), nullable=False),
+        sa.Column('is_finished', sa.Boolean, nullable=False)
     )
 
 
