@@ -15,7 +15,7 @@ async def register():
         'email': payload.get('email'),
     }
     await user_service.register(**data)
-    return data
+    return {'data': data}, 201
 
 
 @user_bp.route('/profile')
@@ -30,7 +30,7 @@ async def profile():
         return {'data': dict(user)}
     except Exception:
         pass
-    return {'data': None}
+    return {'error': 'Authorization is required'}, 401
 
 
 @user_bp.route('/auth', methods=['POST'])
@@ -41,4 +41,4 @@ async def auth():
     user = dict(user)
 
     token = jwt.encode(user, SECRET, 'HS256')
-    return {'token': token.decode('utf8')}
+    return {'data': {'token': token.decode('utf8')}}
