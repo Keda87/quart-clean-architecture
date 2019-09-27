@@ -32,5 +32,20 @@ async def get_all_todo_by_user(user_id):
         return await conn.fetch(sql, user_id)
 
 
-async def update_todo(data, todo_id):
-    pass
+async def get_todo_by_id(todo_id):
+    sql = 'SELECT * FROM todos WHERE id = $1'
+
+    async with current_app.db_pool.acquire() as conn:
+        return await conn.fetchrow(sql, todo_id)
+
+
+async def update_todo(data: dict, todo_id: int):
+    set_values = [
+        f'SET {key} = {"true" if value else "false"}'
+        for key, value in data.items()
+    ]
+    set_values = ', '.join(set_values)
+
+    sql = f'UPDATE todos {set_values} WHERE id = $1'
+    async with current_app.db_pool.acquire() as conn:
+        return await conn.execute(sql, todo_id)
