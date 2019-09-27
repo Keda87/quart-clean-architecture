@@ -20,7 +20,8 @@ async def get_all_todo_by_user(user_id):
     SELECT 
         td.id,
         td.name,
-        td.is_finished
+        td.is_finished,
+        us.email AS email
     FROM
         users AS us 
     INNER JOIN
@@ -40,10 +41,11 @@ async def get_todo_by_id(todo_id):
 
 
 async def update_todo(data: dict, todo_id: int):
-    set_values = [
-        f'SET {key} = {"true" if value else "false"}'
-        for key, value in data.items()
-    ]
+    set_values = []
+    for key, value in data.items():
+        if isinstance(value, bool):
+            value = "true" if value else "false"
+        set_values.append(f'SET {key} = {value}')
     set_values = ', '.join(set_values)
 
     sql = f'UPDATE todos {set_values} WHERE id = $1'
