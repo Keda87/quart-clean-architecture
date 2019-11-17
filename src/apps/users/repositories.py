@@ -3,7 +3,7 @@ from quart import current_app
 
 async def insert_user(data: dict):
     insert = """
-    INSERT INTO users(name, email) 
+    INSERT INTO users(name, email)
     VALUES($1, $2)
     """
     name = data.get('name')

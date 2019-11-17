@@ -1,8 +1,8 @@
 from quart import Quart
 
 from .config.database import ConnectionPool
-from .todos.controllers import todo_bp
-from .users.controllers import user_bp
+from .apps.todos.controllers import todo_bp
+from .apps.users.controllers import user_bp
 
 
 app = Quart(__name__)

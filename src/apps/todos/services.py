@@ -12,6 +12,7 @@ async def create_todo(name: str, user: dict):
     }
     return await insert_todo(data)
 
+
 async def get_all_todo(user):
     user_id = user.get('id')
     return await get_all_todo_by_user(user_id)

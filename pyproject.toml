@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "quart-clean-architecture"
+version = "0.1.0"
+description = ""
+authors = ["Keda87 <adiyatmubarak@gmail.com>"]
+license = "WTFPL"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+Quart = "0.10.0"
+uvloop = "0.13.0"
+psycopg2 = "2.8.3"
+asyncpg = "0.18.3"
+alembic = "1.2.0"
+PyJWT = "1.7.1"
+cerberus = "1.3.2"
+
+[tool.poetry.dev-dependencies]
+pycodestyle = "^2.5.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

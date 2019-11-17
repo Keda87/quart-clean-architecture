@@ -31,7 +31,7 @@ async def list_todo():
         user = jwt.decode(token, SECRET, 'HS256')
     except Exception:
         return {'error': 'Authorization is required'}, 401
-    
+
     data = await todo_service.get_all_todo(user)
     data = list(data)
 
