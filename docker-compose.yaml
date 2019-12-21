@@ -4,6 +4,8 @@ services:
     build: .
     image: quart-todo-api
     container_name: quart-todo-api
+    depends_on:
+      - db
     volumes:
       - ./src:/usr/app/code/src
       - ./alembic:/usr/app/code/alembic
@@ -12,3 +14,8 @@ services:
     ports:
     - "5000:5000"
     command: hypercorn src.server:app --bind '0.0.0.0:5000' --worker-class uvloop --reload
+  db:
+    image: postgres:12.0-alpine
+    container_name: todo_db
+    env_file: 
+      - .env

@@ -2,6 +2,7 @@ import os
 import jwt
 from quart import Blueprint, request
 from . import services as user_service
+from ...helpers.decorators import auth_required
 
 user_bp = Blueprint('user_bp', __name__)
 SECRET = os.environ.get('SECRET_KEY')
@@ -19,18 +20,11 @@ async def register():
 
 
 @user_bp.route('/profile')
+@auth_required()
 async def profile():
-    headers = request.headers.to_dict()
-    token = headers.get('Authorization')
-    try:
-        data = jwt.decode(token, SECRET, 'HS256')
-        user_id = data.get('id')
-
-        user = await user_service.detail_user(user_id)
-        return {'data': dict(user)}
-    except Exception:
-        pass
-    return {'error': 'Authorization is required'}, 401
+    user_id = request.user.get('id')
+    user = await user_service.detail_user(user_id)
+    return {'data': dict(user)}
 
 
 @user_bp.route('/auth', methods=['POST'])
