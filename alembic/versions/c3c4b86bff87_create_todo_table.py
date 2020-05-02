@@ -10,20 +10,21 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'c3c4b86bff87'
-down_revision = '8724a035936a'
+revision = "c3c4b86bff87"
+down_revision = "8724a035936a"
 branch_labels = None
 depends_on = None
 
-TABLE_NAME = 'todos'
+TABLE_NAME = "todos"
+
 
 def upgrade():
     op.create_table(
         TABLE_NAME,
-        sa.Column('id', sa.BigInteger, primary_key=True),
-        sa.Column('name', sa.String(225), nullable=False),
-        sa.Column('user_id', sa.BigInteger, sa.ForeignKey('users.id'), nullable=False),
-        sa.Column('is_finished', sa.Boolean, nullable=False)
+        sa.Column("id", sa.BigInteger, primary_key=True),
+        sa.Column("name", sa.String(225), nullable=False),
+        sa.Column("user_id", sa.BigInteger, sa.ForeignKey("users.id"), nullable=False),
+        sa.Column("is_finished", sa.Boolean, nullable=False),
     )
 
 

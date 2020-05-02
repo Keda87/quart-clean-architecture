@@ -4,5 +4,6 @@ docker-compose.yaml
 Dockerfile
 Pipfile
 *.lock
+*.toml
 .gitignore
 .dockerignore

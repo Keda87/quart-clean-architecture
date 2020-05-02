@@ -20,8 +20,8 @@ async def on_stop():
     await app.db_pool.close()
 
 
-@app.route('/')
+@app.route("/")
 async def index():
     return {
-        'status': 'ok',
+        "status": "ok",
     }

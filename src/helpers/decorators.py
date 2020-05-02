@@ -3,7 +3,7 @@ import jwt
 from functools import wraps
 from quart import request
 
-SECRET = os.environ.get('SECRET_KEY')
+SECRET = os.environ.get("SECRET_KEY")
 
 
 def auth_required():
@@ -11,11 +11,13 @@ def auth_required():
         @wraps(func)
         async def check_token(*args, **kwargs):
             headers = request.headers.to_dict()
-            token = headers.get('Authorization')
+            token = headers.get("Authorization")
             try:
-                user = jwt.decode(token, SECRET, 'HS256')
+                user = jwt.decode(token, SECRET, "HS256")
                 request.user = user
             except Exception:
-                return {'error': 'Authorization is required'}, 401
+                return {"error": "Authorization is required"}, 401
+
         return check_token
+
     return wrapper

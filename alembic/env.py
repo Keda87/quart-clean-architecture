@@ -7,19 +7,19 @@ from sqlalchemy import pool
 
 from alembic import context
 
-DB_HOST = os.environ.get('DB_HOST')
-DB_PORT = os.environ.get('DB_PORT')
-DB_NAME = os.environ.get('DB_NAME')
-DB_PASS = os.environ.get('DB_PASS')
-DB_USER = os.environ.get('DB_USER')
-DB_DRIVER = os.environ.get('DB_DRIVER')
+DB_HOST = os.environ.get("DB_HOST")
+DB_PORT = os.environ.get("DB_PORT")
+DB_NAME = os.environ.get("DB_NAME")
+DB_PASS = os.environ.get("DB_PASS")
+DB_USER = os.environ.get("DB_USER")
+DB_DRIVER = os.environ.get("DB_DRIVER")
 
-ALEMBIC_URI = f'{DB_DRIVER}://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
+ALEMBIC_URI = f"{DB_DRIVER}://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
-config.set_main_option('sqlalchemy.url', ALEMBIC_URI)
+config.set_main_option("sqlalchemy.url", ALEMBIC_URI)
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
@@ -75,9 +75,7 @@ def run_migrations_online():
     )
 
     with connectable.connect() as connection:
-        context.configure(
-            connection=connection, target_metadata=target_metadata
-        )
+        context.configure(connection=connection, target_metadata=target_metadata)
 
         with context.begin_transaction():
             context.run_migrations()
